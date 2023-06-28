@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scotty - Benutzer hinzufügen</title>
+
+    <meta name="description"
+          content="Diese Seite fügt einen Benuter zu Scotty, dem Inventar-Verwaltungssystem der Fachschaft-Nord hinzu">
+    <meta name="author" content="born">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="web/main.css">
+
+    <style>
+        ::placeholder {
+            color: lightgray !important;
+            opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: lightgray !important;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: lightgray !important;
+        }
+
+        .active {
+            background-color: gray !important;
+
+        }
+
+        .dropdown-item {
+
+        }
+    </style>
+
+</head>
+<body class="inner">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="navbar"></div>
+            <div class="jumbotron" style="border: black; border-style: solid">
+                <h2>
+                    Mietvorgang anlegen
+                </h2>
+                <p>
+                    Auf dieser Seite kannst du einen neuen Benutzer hinzufügen. Gib unten die Daten ein und bestätige.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card text-white bg-primary mb-3 ">
+
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label for="userInput" class="form-label mt-2">User</label>
+                        <select class="form-control userAutoSelect" data-pattern=".+" id="userInput"
+                                autocomplete="off" aria-describedby="userHelp">
+                        </select>
+                        <small id="userHelp" class="form-text text-muted">Suche nach einem User</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endDateInput" class="form-label mt-4">Ende des Vorgangs</label>
+                        <input type="text" class="form-control" id="endDateInput" aria-describedby="endDateHelp"
+                               placeholder="20.12.2021" data-pattern="[0-9]{2}\.[0-9]{2}\.[0-9]{4}" value="28.09.2024">
+                        <small id="endDateHelp" class="form-text text-muted">Datum, bis zu dem vermietet werden
+                            soll</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commentInput" class="form-label mt-4">Kommentar</label>
+                        <input type="text" class="form-control" id="commentInput" aria-describedby="commentHelp"
+                               placeholder="Ein kleiner Hinweis" data-pattern=".*" value="Total okay">
+                        <small id="commentHelp" class="form-text text-muted">Weitere informationen</small>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="card text-white bg-primary mb-3 ">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="elementInput" class="form-label mt-2">Elemente Suchen</label>
+                        <select class="form-control elementAutoSelect" data-pattern=".+" id="elementInput"
+                                autocomplete="off" aria-describedby="elementHelp">
+                        </select>
+                        <small id="elementHelp" class="form-text text-muted">Suche nach einem Element</small>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div id="items">
+
+            </div>
+
+            <button type="button" id="rentItemSubmit" class="btn btn-primary w-100 mt-1">Absenden</button>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+
+<script src="web/bundle.js"></script>
+
+<script src="web/validate.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+<!--suppress JSJQueryEfficiency -->
+<script>
+
+
+    $('.elementAutoSelect').autoComplete({
+        resolver: "custom",
+        events: {
+            "search": function (q, callback) {
+                window.scotty.RentItemDomSearch.searchElements(q).then(function (data) {
+
+                    window.scotty.RuntimeCommons.serial(function (e) {
+                        return new Promise(function (resolve) {
+                            window.scotty.RentItemDomRenderer.renderElementsInList(e).then(
+                                function (item) {
+                                    resolve(item)
+                                }
+                            )
+                        })
+                    }, data).then(
+                        function (data) {
+                            callback(data)
+                        }
+                    )
+                })
+
+            }
+        }
+    })
+    $('.elementAutoSelect').on("autocomplete.select", function (evt, item) {
+        const button = $("#rentItemSubmit")
+        button.addClass("mt-3")
+        button.removeClass("mt-1")
+
+        if (item !== undefined) {
+            $('.elementAutoSelect').val("")
+            window.scotty.RentItemDom.onElementSelect(item.id)
+        }
+    })
+
+    $('.userAutoSelect').autoComplete({
+        resolver: "custom",
+        events: {
+            "search": function (q, callback) {
+                window.scotty.RentItemDomSearch.searchUsers(q).then(function (data) {
+                    window.scotty.RuntimeCommons.serial(function (e) {
+                        return new Promise(function (resolve) {
+                            window.scotty.RentItemDomRenderer.rentItemsRenderUserInList(e, resolve)
+                        })
+                    }, data).then(
+                        function (data) {
+                            callback(data)
+                        }
+                    )
+                })
+
+            }
+        }
+    })
+
+    $('.userAutoSelect').on("autocomplete.select", function (evt, item) {
+        $('#userInput').attr("data-selected", item.id);
+    })
+
+
+</script>
+
+<script>
+    window.scotty.navbar("create_user", "navbar")
+    window.scotty.rent_items()
+
+    validation($("input"), function () {
+        $("#rentItemSubmit").prop('disabled', false);
+    }, function () {
+        $("#rentItemSubmit").prop('disabled', true);
+    }, {
+        "elementInput": {
+            "by": "elementHelp",
+            "pattern": ".*"
+        },
+        "userInput": {
+            "by": "userHelp",
+            "pattern": ".+"
+        }
+    })
+
+</script>
+
+</body>
+</html>

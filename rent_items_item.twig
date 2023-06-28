@@ -1,0 +1,37 @@
+<div class="card text-white bg-primary mb-1 mt-1" data-element-id="{{ id }}">
+    <div class="card-header d-flex justify-content-between">
+        <p class="mb-0">{{ inventory_id }}</p>
+
+        {% if availability == "available" %}
+            <p class="mb-0 text-success">Verfügbar!</p>
+        {% elseif availability == "rented" %}
+            <p class="mb-0 text-warning">Bis {{ availability_date }} reserviert</p>
+        {% elseif availability == "disabled" %}
+            <p class="mb-0 text-dark">Nicht verfügbar</p>
+        {% elseif availability == "overdue" %}
+            <p class="mb-0 text-danger">Seit {{ availability_date }} überzogen</p>
+        {% endif %}
+
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">{{ title }}</h4>
+        <p class="card-text mb-0">{{ location }}</p>
+        <small class="form-text text-muted mb-3">Raum/Regal</small>
+
+        <p class="card-text mb-0">{{ acquisition_date }}</p>
+        <small class="form-text text-muted mb-3">Akquisitionsdatum</small>
+
+        <p class="card-text mb-0">{{ price }}€</p>
+        <small class="form-text text-muted mb-3">Ursprünglicher Einkaufspreis (netto)</small>
+
+        <p class="card-text mb-0">{{ supplier }}</p>
+        <small class="form-text text-muted mb-3">Bezugsquelle</small>
+
+        <p class="card-text mb-0">{{ comment }}</p>
+        <small class="form-text text-muted mb-3">Kommentar</small>
+
+        {% if _removable %}
+        <button type="button" id="rentItemSubmit" class="btn btn-primary bg-danger w-100" onclick="console.log($(this).parent().parent().remove())">Entfernen</button>
+        {% endif %}
+    </div>
+</div>

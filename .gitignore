@@ -1,0 +1,5 @@
+/.secure/scotty.db
+/build/
+/node_modules/
+/vendor/
+/web/bundle.js

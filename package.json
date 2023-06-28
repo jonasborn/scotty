@@ -1,0 +1,24 @@
+{
+  "name": "scotty",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "webpack-cli@3.3.12"
+  },
+  "devDependencies": {
+    "@types/jquery": "~3.5.16",
+    "jquery": "~3.7.0",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@types/twig": "^1.12.9",
+    "ascii-table3": "^0.8.2",
+    "memoizee": "^0.4.15",
+    "tinycache": "^1.1.2",
+    "twig": "^1.16.0"
+  }
+}

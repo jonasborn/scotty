@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scotty - Benutzer hinzufügen</title>
+
+    <meta name="description" content="Diese Seite fügt einen Benuter zu Scotty, dem Inventar-Verwaltungssystem der Fachschaft-Nord hinzu">
+    <meta name="author" content="born">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" type="text/css" href="web/main.css">
+
+    <style>
+        ::placeholder {
+            color: lightgray !important;
+            opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: lightgray !important;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: lightgray !important;
+        }
+    </style>
+
+</head>
+<body class="inner">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="navbar"></div>
+            <div class="jumbotron" style="border: black; border-style: solid">
+                <h2>
+                    Benutzer hinzufügen
+                </h2>
+                <p>
+                    Auf dieser Seite kannst du einen neuen Benutzer hinzufügen. Gib unten die Daten ein und bestätige.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card text-white bg-primary mb-3 ">
+
+                <form id="form">
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="nameInput" class="form-label mt-4">Vorname(n)</label>
+                            <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp"
+                                   placeholder="John Michael" data-pattern=".{1,}" value="Nhat Hong">
+                            <small id="nameHelp" class="form-text text-muted">Getrennt durch Leerzeichen</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surnameInput" class="form-label mt-4">Nachname</label>
+                            <input type="text" class="form-control" id="surnameInput" aria-describedby="surnameHelp"
+                                   placeholder="Dow" data-pattern=".{1,}" value="Do">
+                            <small id="surnameHelp" class="form-text text-muted">Getrennt durch Leerzeichen</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailInput" class="form-label mt-4">E-Mail Adresse</label>
+                            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
+                                   placeholder="deine-email@irgendwo.de"
+                                   data-pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                            value="test@test.de">
+                            <small id="emailHelp" class="form-text text-muted">Diese E-Mail muss erreichbar sein! Wird
+                                für
+                                den Login verwendet.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentIdInput" class="form-label mt-4">Matrikelnummer</label>
+                            <input type="text" class="form-control" id="studentIdInput" aria-describedby="studentIdHelp"
+                                   placeholder="1234567" data-pattern="[0-9]+" value="1234567">
+                            <small id="studentIdHelp" class="form-text text-muted">Bitte zwei mal prüfen!</small>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <button type="button" id="createUserSubmit" class="btn btn-primary w-100" disabled>Absenden</button>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+<script src="web/bundle.js"></script>
+
+<script src="web/validate.js"></script>
+
+<script>
+    validation($("input"), function () {
+        $("#createUserSubmit").prop('disabled', false);
+    }, function () {
+        $("#createUserSubmit").prop('disabled', true);
+    })
+</script>
+
+<script>
+    window.scotty.navbar("create_user", "navbar")
+    window.scotty.create_user()
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+export * from './InspectionApi';
+import { InspectionApi } from './InspectionApi';
+export * from './ItemApi';
+import { ItemApi } from './ItemApi';
+export * from './ItemProcessApi';
+import { ItemProcessApi } from './ItemProcessApi';
+export * from './ItemStateApi';
+import { ItemStateApi } from './ItemStateApi';
+export * from './ProcessApi';
+import { ProcessApi } from './ProcessApi';
+export * from './StatusApi';
+import { StatusApi } from './StatusApi';
+export * from './UserApi';
+import { UserApi } from './UserApi';
+export * from './UserStateApi';
+import { UserStateApi } from './UserStateApi';
+export const APIS = [InspectionApi, ItemApi, ItemProcessApi, ItemStateApi, ProcessApi, StatusApi, UserApi, UserStateApi];

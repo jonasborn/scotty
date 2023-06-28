@@ -1,0 +1,200 @@
+GET http://localhost:8872/api.php/records/item?page=1%2C2
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 401
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"inventory_id":123456,"title":"Schuhkarton","location":"Schrank 1","acquisition_date":1687296572189,"price":23.99,"supplier":"Bauer GmbH","comment":"Sieht ganz toll aus!","date":1687296126737},{"id":2,"inventory_id":123456,"title":"Hose","location":"Schrank 1","acquisition_date":1687296572189,"price":23.99,"supplier":"Mueller","comment":"Top!","date":1687296126737}],"results":4}
+===
+GET http://localhost:8872/api.php/records/item_process?filter%5B%5D=item%2Ceq%2C1
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 103
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"item":1,"process":1},{"id":2,"item":1,"process":2},{"id":3,"item":1,"process":3}]}
+===
+GET http://localhost:8872/api.php/records/process?filter%5B%5D=id%2Ceq%2C1
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 129
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"manager":1,"user":1,"begin_date":1687296232460,"end_date":1688076000000,"comment":null,"return_date":null}]}
+===
+GET http://localhost:8872/api.php/records/item_process?filter%5B%5D=item%2Ceq%2C2
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 14
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[]}
+===
+GET http://localhost:8872/api.php/records/item?page=1%2C2
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 401
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"inventory_id":123456,"title":"Schuhkarton","location":"Schrank 1","acquisition_date":1687296572189,"price":23.99,"supplier":"Bauer GmbH","comment":"Sieht ganz toll aus!","date":1687296126737},{"id":2,"inventory_id":123456,"title":"Hose","location":"Schrank 1","acquisition_date":1687296572189,"price":23.99,"supplier":"Mueller","comment":"Top!","date":1687296126737}],"results":4}
+===
+GET http://localhost:8872/api.php/records/item_process?filter%5B%5D=item%2Ceq%2C1
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 103
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"item":1,"process":1},{"id":2,"item":1,"process":2},{"id":3,"item":1,"process":3}]}
+===
+GET http://localhost:8872/api.php/records/process?filter%5B%5D=id%2Ceq%2C1
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 129
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[{"id":1,"manager":1,"user":1,"begin_date":1687296232460,"end_date":1688076000000,"comment":null,"return_date":null}]}
+===
+GET http://localhost:8872/api.php/records/item_process?filter%5B%5D=item%2Ceq%2C2
+Host: localhost:8872
+Host: localhost:8872
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+Accept: */*
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+sec-ch-ua-platform: "Linux"
+Origin: http://localhost:63342
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:63342/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7
+===
+200
+Content-Type: application/json; charset=utf-8
+Content-Length: 14
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: http://localhost:63342
+
+{"records":[]}
+===
