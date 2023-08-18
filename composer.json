@@ -1,5 +1,11 @@
 {
+    "repositories": [
+        {
+            "url": "https://github.com/jonasborn/php-crud-api.git",
+            "type": "git"
+        }
+    ],
     "require": {
-        "mevdschee/php-crud-api": "^2.14"
+        "mevdschee/php-crud-api": "dev-main"
     }
 }

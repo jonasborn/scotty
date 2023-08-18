@@ -44,7 +44,7 @@ export function rent_items() {
                             console.log("Item to process relation with id " + value.id + " was created")
                             resolve()
                         }).catch((e) => {
-                           reject(e)
+                            reject(e)
                         })
                     })
                 })
@@ -59,31 +59,22 @@ export function rent_items() {
         })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     })
 }
 
 export class RentItemDom {
     static onElementSelect(id) {
-        console.log(id)
-
 
         RentItemDomSearch.getElement(id).then((data) => {
-            console.log(data)
-            Template.render("rent_items_item.twig", data, function (body) {
-                $("#items").append(body)
-            })
+
+            // @ts-ignore
+            if (data.availability != "available") {
+                ToastCommons.error("Der gewünschte Gegenstand kann aktuell nicht verliehen werden!")
+            } else {
+                Template.render("rent_items_item.twig", data, function (body) {
+                    $("#items").append(body)
+                })
+            }
         })
 
     }
@@ -125,6 +116,7 @@ export class RentItemDomSearch {
         return new Promise((resolve, reject) => {
             UserCommons.search(input).then((data) => {
                 resolve(data)
+            }).catch((e) => {
             }).catch((e) => {
                 reject(e)
             })

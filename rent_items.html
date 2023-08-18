@@ -140,7 +140,7 @@
 <!--suppress JSJQueryEfficiency -->
 <script>
 
-
+    // Autoselect uses this JS part to call the TS functions. Search and renderer are split.
     $('.elementAutoSelect').autoComplete({
         resolver: "custom",
         events: {
@@ -157,6 +157,7 @@
                         })
                     }, data).then(
                         function (data) {
+                            console.log(data)
                             callback(data)
                         }
                     )
@@ -180,7 +181,9 @@
         resolver: "custom",
         events: {
             "search": function (q, callback) {
+                console.log(q)
                 window.scotty.RentItemDomSearch.searchUsers(q).then(function (data) {
+                    console.log(data)
                     window.scotty.RuntimeCommons.serial(function (e) {
                         return new Promise(function (resolve) {
                             window.scotty.RentItemDomRenderer.rentItemsRenderUserInList(e, resolve)
@@ -196,8 +199,14 @@
         }
     })
 
+    // As the initial element used to the input is not used by the library,
+    // it is needed to use the lib event and set the selected id to the initial element known
+    // by TS
     $('.userAutoSelect').on("autocomplete.select", function (evt, item) {
-        $('#userInput').attr("data-selected", item.id);
+        if (item !== undefined && item.id !== undefined) {
+            $('#userInput').attr("data-selected", item.id);
+        }
+
     })
 
 
@@ -212,10 +221,6 @@
     }, function () {
         $("#rentItemSubmit").prop('disabled', true);
     }, {
-        "elementInput": {
-            "by": "elementHelp",
-            "pattern": ".*"
-        },
         "userInput": {
             "by": "userHelp",
             "pattern": ".+"

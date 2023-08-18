@@ -11,6 +11,7 @@ import {rent_items, RentItemDomSearch, RentItemDomRenderer, RentItemDom} from ".
 import {rent_item_receipt} from "./rent_item_receipt";
 
 import {RuntimeCommons} from "./RuntimeCommons";
+import {list_processes} from "./processes/list_processes"
 
 //const template = twig({
 
@@ -27,7 +28,7 @@ export {
     navbar,
     rent_items,
 
-
+    list_processes,
     rent_item_receipt,
     RuntimeCommons,
     RentItemDomRenderer,

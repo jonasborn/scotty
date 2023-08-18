@@ -11,11 +11,10 @@ export function list_items() {
     let page = 1;
     let max = 10;
 
-    const load = function () {
-        ItemsCommons.search("", limit, page).then((data) => {
+    const load = function (callback = null) {
+        ItemsCommons.search($("#searchInput").val().toString(), limit, page).then((data) => {
             max = Math.ceil(data["_total"] / limit)
             RuntimeCommons.serial((e) => {
-                console.log(e)
                 return new Promise((resolve, reject) => {
                     Template.render(
                         "rent_items_item.twig", {
@@ -41,10 +40,33 @@ export function list_items() {
                     )
                 })
             }, data).then((list) => {
-                console.log("Jo")
+                if (callback != null) {
+                    callback()
+                }
             })
         })
     }
+
+    let timer = null
+
+    $("#searchButton").on("click", function () {
+        $(this).prop("disabled", true)
+        $("#progress").show()
+        if (timer !== null) {
+            clearTimeout(timer)
+        }
+
+        setTimeout(function () {
+            $("#searchResults").empty()
+            page = 0
+            load(function () {
+                $("#searchButton").prop("disabled", false)
+                $("#progress").hide()
+            })
+        }, 1000)
+
+    })
+
 
     load()
     page++

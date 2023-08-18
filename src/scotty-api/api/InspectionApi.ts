@@ -236,6 +236,9 @@ export class InspectionApi {
     /**
      * list inspection
      * @param filter Filters to be applied. Each filter consists of a column, an operator and a value (comma separated). Example: id,eq,1
+     * @param filter1 Filters to be applied. Each filter consists of a column, an operator and a value (comma separated). Example: id,eq,1
+     * @param filter2 Filters to be applied. Each filter consists of a column, an operator and a value (comma separated). Example: id,eq,1
+     * @param filter3 Filters to be applied. Each filter consists of a column, an operator and a value (comma separated). Example: id,eq,1
      * @param include Columns you want to include in the output (comma separated). Example: posts.*,categories.name
      * @param exclude Columns you want to exclude from the output (comma separated). Example: posts.content
      * @param order Column you want to sort on and the sort direction (comma separated). Example: id,desc
@@ -243,7 +246,7 @@ export class InspectionApi {
      * @param page Page number and page size (comma separated). Example: 1,10
      * @param join Paths (comma separated) to related entities that you want to include. Example: comments,users
      */
-    public listInspection(filter?: Array<string>, include?: string, exclude?: string, order?: Array<string>, size?: string, page?: string, join?: Array<string>, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQuery.Promise<
+    public listInspection(filter?: Array<string>, filter1?: Array<string>, filter2?: Array<string>, filter3?: Array<string>, include?: string, exclude?: string, order?: Array<string>, size?: string, page?: string, join?: Array<string>, extraJQueryAjaxSettings?: JQueryAjaxSettings): JQuery.Promise<
     { response: JQueryXHR; body: models.ListInspection;  },
     { response: JQueryXHR; errorThrown: string }
     > {
@@ -255,6 +258,24 @@ export class InspectionApi {
             queryParameters['filter'] = [];
             filter.forEach((element: any) => {
                 queryParameters['filter'].push(element);
+            });
+        }
+        if (filter1) {
+            queryParameters['filter1'] = [];
+            filter1.forEach((element: any) => {
+                queryParameters['filter1'].push(element);
+            });
+        }
+        if (filter2) {
+            queryParameters['filter2'] = [];
+            filter2.forEach((element: any) => {
+                queryParameters['filter2'].push(element);
+            });
+        }
+        if (filter3) {
+            queryParameters['filter3'] = [];
+            filter3.forEach((element: any) => {
+                queryParameters['filter3'].push(element);
             });
         }
         if (include !== null && include !== undefined) {

@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe4f02968df695d2eb5dc58014fe0a94",
+    "content-hash": "e08a87649eab18d02d11f1562ced9129",
     "packages": [
         {
             "name": "mevdschee/php-crud-api",
-            "version": "v2.14.20",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mevdschee/php-crud-api.git",
-                "reference": "a459e0659b6bd48a04dc770317f9af3c533a05ea"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mevdschee/php-crud-api/zipball/a459e0659b6bd48a04dc770317f9af3c533a05ea",
-                "reference": "a459e0659b6bd48a04dc770317f9af3c533a05ea",
-                "shasum": ""
+                "url": "https://github.com/jonasborn/php-crud-api.git",
+                "reference": "c485dea300f525e02eeb017df322d204e0df7e44"
             },
             "require": {
                 "ext-json": "*",
@@ -37,13 +31,13 @@
                 "ext-memcached": "*",
                 "ext-redis": "*"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Tqdev\\PhpCrudApi\\": "src/Tqdev/PhpCrudApi"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -57,7 +51,6 @@
             "description": "Single file PHP script that adds a REST API to a SQL database.",
             "homepage": "https://github.com/mevdschee/php-crud-api",
             "keywords": [
-                "PHP-API",
                 "api-server",
                 "automatic-api",
                 "crud",
@@ -67,6 +60,7 @@
                 "mysql",
                 "openapi",
                 "php",
+                "php-api",
                 "postgis",
                 "postgresql",
                 "rest-api",
@@ -76,11 +70,7 @@
                 "swagger",
                 "ubuntu-linux"
             ],
-            "support": {
-                "issues": "https://github.com/mevdschee/php-crud-api/issues",
-                "source": "https://github.com/mevdschee/php-crud-api/tree/v2.14.20"
-            },
-            "time": "2023-06-14T20:10:43+00:00"
+            "time": "2023-07-16T12:23:46+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -451,7 +441,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mevdschee/php-crud-api": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

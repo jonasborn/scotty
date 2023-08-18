@@ -20,89 +20,98 @@ export class ItemsCommons {
     static search(input: String, limit: number = 10, page: number = 0): Promise<ItemDef[]> {
 
 
-
         console.log(limit)
 
-        const iapi = new ItemApi()
-        const piapi = new ItemProcessApi()
-        const papi = new ProcessApi()
+        const itemApi = new ItemApi()
+        const itemProcessApi = new ItemProcessApi()
+        const processApi = new ProcessApi()
 
-        return  new Promise((resolve, reject) => {
-            iapi.listItem(
-                undefined, undefined, undefined, undefined, undefined, page.toString() + "," + limit
+        let filter1 = []
+        let filter2 = []
+        if (input !== null) {
+            filter1 = [
+                "title,cs," + input
+            ]
+            filter2 = [
+                "inventory_id,sw," + input
+            ]
+        }
+
+
+        return new Promise((resolve, reject) => {
+            itemApi.listItem(
+                undefined, filter1, filter2, undefined, undefined, undefined, undefined, undefined, page.toString() + "," + limit
             ).then((response) => {
 
-               RuntimeCommons.serial((e) => {
+                RuntimeCommons.serial((itemResult) => {
 
-                   const createObject = function (state, availability_date) {
-                       const data: ItemDef = {
-                           id: e.id,
-                           title: e.title,
-                           availability: state,
-                           availability_date: availability_date,
-                           inventory_id: e.inventory_id,
-                           acquisition_date: DateCommons.humanFromDate(DateCommons.dateFromInteger(e.acquisition_date)),
-                           location: e.location,
-                           price: e.price,
-                           supplier: e.supplier,
-                           comment: e.comment,
-                       }
-                       return data
-                   }
+                    const createObject = (state, availability_date) => {
+                        const data: ItemDef = {
+                            id: itemResult.id,
+                            title: itemResult.title,
+                            availability: state,
+                            availability_date: availability_date,
+                            inventory_id: itemResult.inventory_id,
+                            acquisition_date: DateCommons.humanFromDate(DateCommons.dateFromInteger(itemResult.acquisition_date)),
+                            location: itemResult.location,
+                            price: itemResult.price,
+                            supplier: itemResult.supplier,
+                            comment: itemResult.comment,
+                        }
+                        return data
+                    }
 
-                  return new Promise<any>((resolve, reject) => {
+                    return new Promise<any>((resolve, reject) => {
 
-                      let state = "available"
-                      let availability_date = DateCommons.humanFromDate(new Date())
+                        let state = "available"
+                        let availability_date = DateCommons.humanFromDate(new Date())
 
-                      //Search for related item-process
-                      piapi.listItemProcess(["item,eq," + e.id]).then((pi) => {
+                        console.log(["item,eq," + itemResult.id])
+                        //Search for related item-process
+                        itemProcessApi.listItemProcess(["item,eq," + itemResult.id]).then((iPResult) => {
 
-                          if (pi.body.records.length > 0) {
-                              console.log("Process ref found")
-
-                              papi.listProcess(["id,eq," + pi.body.records[0].id]).then((p) => {
-
-                                  if (p.body.records.length > 0) {
-
-                                      console.log("Process found")
-
-                                      const found = p.body.records[0]
-                                      if (found.end_date !== undefined && found.return_date === null) {
-                                          availability_date = DateCommons.humanFromDate(DateCommons.dateFromInteger(found.end_date))
-                                          if (new Date().getTime() > found.end_date) {
-                                              state = "overdue"
-                                          } else {
-                                              state = "rented"
-                                          }
-                                      }
-                                  }
+                            if (iPResult.body.records.length > 0) {
 
 
-                                  resolve(createObject(state, availability_date))
+                                processApi.listProcess(["id,eq," + iPResult.body.records[0].process]).then((p) => {
 
-                              })
+                                    if (p.body.records.length > 0) {
+                                        const found = p.body.records[0]
+                                        if (found.end_date !== undefined && found.return_date === null) {
+                                            availability_date = DateCommons.humanFromDate(DateCommons.dateFromInteger(found.end_date))
+                                            if (new Date().getTime() > found.end_date) {
+                                                state = "overdue"
+                                            } else {
+                                                state = "rented"
+                                            }
+                                        }
+                                    } else {
+                                        console.warn("Process with id " + iPResult.body.records[0].id + " missing")
+                                    }
 
-                          } else {
-                              resolve(createObject(state, availability_date))
-                          }
 
-                      })
+                                    resolve(createObject(state, availability_date))
 
-                  })
-               }, response.body.records).then(function (data) {
-                   data["_total"] = response.body.results
-                   resolve(data)
-               })
+                                })
+
+                            } else {
+                                resolve(createObject(state, availability_date))
+                            }
+
+                        })
+
+                    })
+                }, response.body.records).then(data => {
+                    data["_total"] = response.body.results
+                    resolve(data)
+                }).catch((e) => {
+                    reject(e)
+                })
             });
         })
 
 
-
-
     }
-
-
 
 
 }
